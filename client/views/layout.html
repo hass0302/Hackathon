@@ -1,0 +1,23 @@
+<template name="layout">
+<!--{{> header}}-->
+
+  <div class="container" style="min-height: {{instance.minHeight.get}}">
+    {{# if currentUser}}
+      <div class="row">
+        <div class="col-md-4">
+          {{> navigation}}
+        </div>
+        <div class="col-md-8">
+          {{> Template.dynamic template=main}}
+        </div>
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="four columns offset-by-four">
+          {{> Template.dynamic template=main}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  {{> footer}}
+</template>

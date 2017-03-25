@@ -1,0 +1,68 @@
+<template name="navigation">
+    <div class="row">
+        <div class="twelve columns">
+            <div class="navigation navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+<!--                    <a href="/"> <img class="logo" src="/img/PROJECT_LOGO.png" alt="SportsGrid Logo" /> </a>-->
+                    
+                    
+                    <button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    
+                    <a class="navbar-brand" href="{{pathFor 'jobBoard'}}">Home</a>
+                    
+                    <a class="navbar-brand" href="#">Filter</a>
+               
+                </div>
+                <div class="navbar-collapse collapse">
+                    <div class="profile">
+        {{> avatar user=currentUser size='extra-large' shape='circle' class='avatar-center'}}
+        <h1 class="text-center username">@{{currentUser.username}}</h1>
+        <div id="socialMediaAccounts">
+        </div>
+        <ul class="text-center">
+        <li class="{{activeIfRouteNameIs 'updateProfile'}}"> <a href="{{pathFor 'updateProfile'}}"> Update profile</a> </li>
+      </ul>
+                  </div>
+                   <hr>
+                    <ul>
+<!--                        <li class="{{activeIfRouteNameIs 'feed'}}"> <a href="{{pathFor 'feed'}}"><i class="fa fa-newspaper-o"></i> Feed</a> </li>-->
+                       <li class="{{activeIfRouteNameIs 'jobBoard'}}"> <a href="{{pathFor 'jobBoard'}}"> Home</a> </li>
+                       
+                       <li> <a href="#"> Create Event</a> </li>
+                       
+                       <hr>
+                       
+                       <li> <a href="#"> Soccer</a> </li>
+                       <li> <a href="#"> Basketball</a> </li>
+                       <li> <a href="#"> Yoga</a> </li>
+                       
+                       <hr>
+                       
+                        <li class="{{activeIfRouteNameIs 'browseUsers'}}"> <a href="{{pathFor 'browseUsers'}}"> Browse users</a> </li>
+                        <li class="{{activeIfRouteNameIs 'messages'}}"> <a href="{{pathFor 'messages'}}"> Messages {{getUnreadCount}}</a> </li>
+                        <li class="{{activeIfRouteNameIs 'following'}}"> <a href="{{pathFor 'following'}}"> Following</a> </li>
+                        <li class="{{activeIfRouteNameIs 'follower'}}"> <a href="{{pathFor 'follower'}}"> Followers</a> </li>
+                        
+                        <hr>
+                        <li class="{{activeIfRouteNameIs 'settings'}}"> <a href="{{pathFor 'settings'}}"> Settings</a> </li>
+                        
+                        {{#if currentUser}}
+                        <li class="sign-out">
+                            <a data-id="sign-out"> Logout</a>
+                        </li> {{/if}} </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<!--
+<template name="toolbar">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">Snippets</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right"> {{> loginButtons}} here </ul>
+        </div>
+    </div>
+</template>-->

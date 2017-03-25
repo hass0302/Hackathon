@@ -1,0 +1,121 @@
+<template name="jobBoard">
+  {{#if showAllJobs}}
+    <div class="row">
+<!--
+      <div class="twelve columns">  
+        <button id="postJobButton" class="button-primary">Create Event</button>    
+        <form data-id="search-jobs-form">
+          <input type="text" class="u-full-width" placeholder="Search events..." data-id="search-jobs-query">
+        </form>
+      </div>
+-->
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        {{#each jobs}}
+          <div id="{{_id}}" class="small-profile">
+            <b>{{schedule}} </b><br/>
+            {{title}} <br/>
+            {{location}} <br/>
+            {{formatDate createdOn}}
+            {{#if isAuthor author}}
+              <button class="u-pull-right no-button" data-id="remove-job">
+                <i class="fa fa-trash"></i>
+              </button> 
+              <button class="u-pull-right no-button" data-id="edit-job">
+                <i class="fa fa-pencil"></i>
+              </button>
+            {{/if}}
+          </div>
+        {{/each}}
+        {{#if Template.subscriptionsReady}}
+          {{#unless instance.jobsCount.get}}
+            <div class="alert info">There are no matching events to display</div>
+          {{/unless}}
+          {{#if hasMoreJobs}}
+            <button class="u-full-width" data-id="load-more">Load more</button>
+          {{/if}}
+        {{else}}
+          <div class="text-center">Loading events...</div>
+        {{/if}}   
+      </div>
+    </div>
+    <div class="col-xs-10 mobileBottomButton visible-xs text-center">
+                <div class="col-xs-2 text-center visible-xs">
+                    <div class="call-button" style="
+    background-color: #fdfdfd;
+    
+">
+                        <button id="postJobButton" class="button-primary">Create Event</button>
+                    </div>
+                </div>
+            </div>
+  {{else}}
+    {{#if showSingleJob}}
+      {{> singleJob}}
+    {{else}}
+      {{> addJob}}
+    {{/if}}
+  {{/if}} 
+</template>
+
+<template name="singleJob">
+  <div class="row">
+  <button class="allJobsButton">All Events</button>
+  {{#with getSingleJob}}
+    <h3>{{title}}</h3> 
+    {{schedule}} <br/>
+    Date posted: {{formatDate createdOn}} <br/>
+    Location: {{location}} <br/><br/>
+        <b>Skill Level:</b> <br/>
+    {{responsibilities}} <br/><br/>
+    <b>Description:</b> <br/>
+    {{description}} <br/><br/>
+    <b>Equipments:</b> <br/>
+    {{qualifications}} <br/><br/>
+    {{#if notAuthor author}}
+      <button id="applyNowButton" class="button-primary">I'm Interested!</button>
+    {{/if}}
+  {{/with}}
+    </div>
+</template>
+
+<template name="addJob">
+  <div class="row">
+  <button class="allJobsButton">Create Event</button>
+  <form data-id="addJob-form">
+    <textarea class="u-full-width addJob-single-line" rows="1" placeholder="Title" data-id="addJob-title"></textarea>
+    <textarea class="u-full-width addJob-single-line" rows="1" placeholder="Location" data-id="addJob-location"></textarea>
+    <select class="addJob-single-line" data-id="addJob-schedule">
+       <option value="Baseball">Baseball</option>
+      <option value="Basketball">Basketball</option>
+      <option value="Hockey">Hockey</option>
+      <option value="Volleyball">Volleyball</option>
+      <option value="Tennis">Tennis</option>
+      <option value="Cycling">Cycling</option>
+      <option value="Golf">Golf</option>
+      <option value="Other">Other</option>
+    </select>
+    <textarea class="u-full-width addJob-multi-line" rows="1" placeholder="Description" data-id="addJob-description"></textarea>
+    <textarea class="u-full-width addJob-multi-line" rows="1" placeholder="Equipments" data-id="addJob-responsibilities"></textarea>
+    <!--<textarea class="u-full-width addJob-multi-line" rows="1" placeholder="Skill Level" data-id="addJob-qualifications"></textarea>-->
+    <span class="three columns">Skill Level</span>
+    <select class="addJob-single-line " data-id="addJob-qualifications">
+       <option value="Noivce">Novice</option>
+      <option value="intermediate">intermediate</option>
+      <option value="Expert">Expert</option>
+    </select>
+
+    <div class="u-full-width" style="display:none">
+      Interested candidates should:&nbsp;
+      <select class="addJob-single-line" data-id="addJob-interestedBehavior">
+        <option value="directMessage">Send direct message</option>  
+        <option value="goToLink">Proceed to external link</option>
+      </select>
+    </div>
+    {{#if showExternalLink}}
+    <textarea class="u-full-width addJob-single-line" rows="1" placeholder="External Link" data-id="addJob-externalLink"></textarea>    {{/if}} 
+    <input type="submit" class="button-primary u-pull-right" data-id="addJob-submit" value="Post">
+  </form>
+    </div>
+</template>
